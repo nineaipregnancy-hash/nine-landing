@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Моё приложение — ссылки и политика приватности</title>
+  <meta name="description" content="Супер-современная розовая посадочная страница с иконками Instagram, TikTok и почты, плюс кнопка для показа Privacy Policy." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300..800&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --pink-1:#fce7f3; /* light */
+      --pink-2:#f9a8d4; /* medium */
+      --pink-3:#ec4899; /* vibrant */
+      --pink-4:#db2777; /* deep */
+      --ink:#1f1147;    /* dark text */
+      --card: rgba(255,255,255,0.28);
+      --glass: rgba(255,255,255,0.45);
+      --border: rgba(255,255,255,0.35);
+      --shadow: rgba(219, 39, 119, 0.35);
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:"Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      color:var(--ink);
+      background: radial-gradient(1200px 800px at 20% 10%, #fff 0%, var(--pink-1) 35%, #ffd6ea 60%, #ffe8f4 100%),
+                  linear-gradient(135deg, #ffe6f6, #ffd1ea 40%, #ffc2e4 60%, #ffd7ef 100%);
+      min-height:100%;
+      overflow-x:hidden;
+    }
+
+    /* floating gradient orbs */
+    .orb{position:fixed; filter:blur(60px); opacity:.55; pointer-events:none; mix-blend-mode:multiply;}
+    .orb.one{width:520px; height:520px; background:radial-gradient(circle at 30% 30%, #ff7ac3, #ff96d0 60%, transparent 70%); top:-120px; left:-120px; animation: float 18s ease-in-out infinite;}
+    .orb.two{width:600px; height:600px; background:radial-gradient(circle at 60% 40%, #ffd1f0, #ff8abd 55%, transparent 70%); bottom:-180px; right:-140px; animation: float 22s ease-in-out infinite reverse;}
+    @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(0,-30px)}}
+
+    .wrap{
+      position:relative; z-index:1;
+      display:grid; place-items:center; min-height:100svh; padding:32px;
+    }
+
+    .card{
+      width:min(720px, 92vw);
+      background:var(--card);
+      backdrop-filter: blur(14px) saturate(130%);
+      -webkit-backdrop-filter: blur(14px) saturate(130%);
+      border:1px solid var(--border);
+      border-radius:28px;
+      box-shadow: 0 20px 80px var(--shadow);
+      padding: clamp(24px, 4vw, 40px);
+      text-align:center;
+    }
+
+    .headline{
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      font-size: clamp(32px, 6vw, 68px);
+      line-height:1.05;
+      margin: 6px 0 12px;
+      letter-spacing: -0.02em;
+      background: linear-gradient(90deg, var(--pink-4), var(--pink-3), #e879f9);
+      -webkit-background-clip: text; background-clip:text; color: transparent;
+    }
+
+    .subtitle{
+      font-size: clamp(14px, 2.2vw, 18px);
+      opacity:.8; margin: 0 0 24px;
+    }
+
+    .cta-row{
+      display:flex; gap:16px; justify-content:center; flex-wrap:wrap;
+      margin: 18px 0 10px;
+    }
+
+    .icon-btn{
+      --size:72px;
+      width:var(--size); height:var(--size);
+      display:grid; place-items:center;
+      border-radius:22px;
+      background:var(--glass);
+      border:1px solid var(--border);
+      backdrop-filter: blur(10px) saturate(150%);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+      cursor:pointer; text-decoration:none; color:inherit;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+      box-shadow: 0 10px 30px rgba(31,17,71,0.08);
+    }
+    .icon-btn:hover{ transform: translateY(-3px) scale(1.03); box-shadow: 0 18px 40px rgba(219,39,119,0.28);}
+    .icon-btn:active{ transform: translateY(0) scale(.98);}
+    .icon-btn svg{ width:32px; height:32px; }
+
+    .policy{
+      margin-top: 26px; display:grid; gap:12px; justify-items:center;
+    }
+    .policy button{
+      font: inherit; font-weight:700;
+      padding: 14px 20px; border-radius:16px; border:1px solid var(--border);
+      background:#fff; cursor:pointer; letter-spacing: .02em;
+      transition: transform .18s ease, box-shadow .18s ease;
+      box-shadow: 0 10px 26px rgba(31,17,71,0.06);
+    }
+    .policy button:hover{ transform: translateY(-2px); box-shadow:0 14px 34px rgba(219,39,119,0.22);}
+
+    .policy-content{
+      width:100%; max-width:60ch; text-align:left; display:none;
+      background: rgba(255,255,255,.82);
+      border:1px solid var(--border); border-radius:16px;
+      padding:18px 20px; line-height:1.6;
+      box-shadow: 0 18px 40px rgba(219,39,119,0.18);
+      animation: fadeIn .25s ease;
+    }
+    @keyframes fadeIn{from{opacity:0; transform: translateY(6px)} to{opacity:1; transform:translateY(0)}}
+    .policy-content h3{margin:0 0 10px; font-size:18px}
+    .muted{opacity:.75}
+
+    /* tiny footer note */
+    .foot{margin-top:18px; font-size:12px; opacity:.6}
+
+    /* accessibility focus */
+    .icon-btn:focus-visible, .policy button:focus-visible{ outline: 3px solid #ef5da8; outline-offset: 2px; }
+
+    /* responsive tweaks */
+    @media (max-width:420px){
+      .icon-btn{ --size:66px; border-radius:18px }
+      .icon-btn svg{ width:28px; height:28px }
+    }
+  </style>
+</head>
+<body>
+  <!-- ambient decor -->
+  <div class="orb one" aria-hidden="true"></div>
+  <div class="orb two" aria-hidden="true"></div>
+
+  <main class="wrap">
+    <section class="card" role="region" aria-label="Витрина приложения">
+      <h1 class="headline">Название Моего Приложения</h1>
+      <p class="subtitle">Короткий слоган или фраза о ценности продукта — нежно, современно, по‑делу.</p>
+
+      <div class="cta-row" aria-label="Социальные ссылки">
+        <!-- TODO: замените href на ваши реальные ссылки -->
+        <a class="icon-btn" href="https://instagram.com/your_handle" target="_blank" rel="noopener" aria-label="Instagram">
+          <!-- Instagram SVG -->
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <defs>
+              <linearGradient id="ig" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                <stop offset="0" stop-color="#f97316"/>
+                <stop offset="0.5" stop-color="#ec4899"/>
+                <stop offset="1" stop-color="#8b5cf6"/>
+              </linearGradient>
+            </defs>
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="url(#ig)" stroke-width="2"/>
+            <circle cx="12" cy="12" r="4.2" stroke="url(#ig)" stroke-width="2"/>
+            <circle cx="17.5" cy="6.5" r="1.2" fill="url(#ig)"/>
+          </svg>
+        </a>
+
+        <a class="icon-btn" href="https://www.tiktok.com/@your_handle" target="_blank" rel="noopener" aria-label="TikTok">
+          <!-- TikTok SVG (monochrome, adapts to currentColor) -->
+          <svg viewBox="0 0 48 48" fill="currentColor" aria-hidden="true">
+            <path d="M31.7 7.2c1.9 2.2 4.2 4 6.9 5v6.3c-3.4-.1-6.7-1.2-9.6-3.1v12.1c0 6.8-5.5 12.3-12.3 12.3S4.4 34.3 4.4 27.5C4.4 20.7 9.9 15.2 16.7 15.2c1 0 2 .1 3 .4v6.7c-.9-.5-1.9-.8-3-.8-3.3 0-6 2.7-6 6s2.7 6 6 6c3.3 0 6-2.7 6-6V4.8h8v2.4z"/>
+          </svg>
+        </a>
+
+        <a class="icon-btn" href="mailto:hello@example.com" aria-label="Email">
+          <!-- Mail SVG -->
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="3" y="5" width="18" height="14" rx="3"/>
+            <path d="M4 7l8 6 8-6"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="policy" role="region" aria-label="Политика конфиденциальности">
+        <button id="ppBtn" type="button" aria-expanded="false" aria-controls="ppContent">Privacy Policy</button>
+        <div id="ppContent" class="policy-content" hidden>
+          <h3>Privacy Policy</h3>
+          <p class="muted">privacypolicy</p>
+          <p class="muted">Здесь вы можете разместить ваш реальный текст политики конфиденциальности. Пока что показан плейсхолдер “privacypolicy”.</p>
+        </div>
+        <div class="foot">© <span id="year"></span> Ваш бренд</div>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // privacy toggle via button
+    const btn = document.getElementById('ppBtn');
+    const panel = document.getElementById('ppContent');
+
+    btn.addEventListener('click', () => {
+      const isHidden = panel.hasAttribute('hidden');
+      if (isHidden) {
+        panel.removeAttribute('hidden');
+        panel.style.display = 'block';
+        btn.setAttribute('aria-expanded', 'true');
+      } else {
+        panel.setAttribute('hidden', '');
+        panel.style.display = 'none';
+        btn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
+</body>
+</html>
